@@ -1,9 +1,9 @@
 import time
-from wsgiref.handlers import format_date_time
 
 import sanic
 from sanic.response import json
 
+from pulsar.utils.httpurl import http_date
 from pulsar.apps.data import create_store
 
 app = sanic.Sanic("test")
@@ -15,7 +15,7 @@ redis = create_store('redis://127.0.0.1:6379/15').client()
 async def test(request):
     response = json({"test": True})
     response.headers['Server'] = SERVER_NAME
-    response.headers['Date'] = format_date_time(time.time())
+    response.headers['Date'] = http_date(int(time.time()))
     return response
 
 
@@ -24,7 +24,7 @@ async def test(request):
     await redis.ping()
     response = json({"test": True})
     response.headers['Server'] = SERVER_NAME
-    response.headers['Date'] = format_date_time(time.time())
+    response.headers['Date'] = http_date(int(time.time()))
     return response
 
 
