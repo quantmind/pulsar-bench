@@ -19,6 +19,14 @@ async def handle(request):
     )
 
 
+async def payload(request):
+    size = int(request.match_info.get('size', 1000))
+    return web.Response(
+        body=json.dumps({"size": size, "data": 'd'*size}).encode('utf-8'),
+        content_type='application/json'
+    )
+
+
 async def ping_redis(request):
     result = await redis.ping()
     return web.Response(
@@ -31,6 +39,7 @@ def app():
     app = web.Application(loop=loop)
     app.router.add_route('GET', '/', handle)
     app.router.add_route('GET', '/ping-redis', ping_redis)
+    app.router.add_get('/payload/{size}', payload)
     return app
 
 

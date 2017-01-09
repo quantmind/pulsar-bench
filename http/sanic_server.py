@@ -19,8 +19,16 @@ async def test(request):
     return response
 
 
+@app.route("/payload/<size:int>")
+async def payload(request, size):
+    response = json({'size': size, 'data': 'd' * size})
+    response.headers['Server'] = SERVER_NAME
+    response.headers['Date'] = http_date(int(time.time()))
+    return response
+
+
 @app.route("/ping-redis")
-async def test(request):
+async def ping_redis(request):
     await redis.ping()
     response = json({"test": True})
     response.headers['Server'] = SERVER_NAME
