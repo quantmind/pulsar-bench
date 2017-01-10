@@ -13,7 +13,7 @@ class SimpleRoute(Router):
         return response
 
     @route('payload/<int(min=1,max=8388608):size>')
-    def get(self, request):
+    def payload(self, request):
         response = request.response
         size = request.urlargs['size']
         response.headers['content-type'] = 'application/json'
@@ -49,10 +49,16 @@ def server(**params):
 if __name__ == '__main__':
     import sys
     argv = sys.argv[1:]
+    params = dict(
+        bind=':7000',
+        log_handler='console_simple',
+        log_level=['warning'],
+        argv=argv
+    )
     if 'profile' in argv:
         from pulsar.utils import profiler
         argv.remove('profile')
         with profiler.Profiler():
-            server(bind=':7000', log_level=['warning'], argv=argv).start()
+            server(**params).start()
     else:
-        server(bind=':7000', log_level=['warning'], argv=argv).start()
+        server(**params).start()
