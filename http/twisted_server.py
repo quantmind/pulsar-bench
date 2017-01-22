@@ -21,21 +21,33 @@ from twisted.internet import reactor
 
 class TestResource(Resource):
 
-    def __init__(self, name=None):
-        super().__init__()
-        self.name = name
-        self.isLeaf = name is not None
-
     def render_GET(self, request):
         body = ujson.dumps({'test': True}).encode('utf8')
         request.setHeader(b'Content-Type', b'application/json; charset=utf-8')
         return body
 
+    def getChild(self, path, request):
+        if path == b'payload':
+            return Payload()
+
+
+class Payload(Resource):
+
+    def __init__(self, size=None):
+        super().__init__()
+        self.size = size or 100
+
+    def render_GET(self, request):
+        body = ('d'*self.size).encode('utf8')
+        request.setHeader(b'Content-Type', b'text/plain; charset=utf-8')
+        return body
+
     def getChild(self, name, request):
-        return TestResource(name=name.decode('utf-8'))
+        return Payload(size=int(name))
 
 
 root = TestResource()
+root.putChild('/payload', Payload())
 site = Site(root)
 
 

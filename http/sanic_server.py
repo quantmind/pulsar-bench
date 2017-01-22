@@ -1,10 +1,10 @@
 import time
 
 import sanic
-from sanic.response import json
+from sanic.response import json, text
 
-from pulsar.utils.httpurl import http_date
 from pulsar.apps.data import create_store
+from pulsar.api import http_date
 
 app = sanic.Sanic("test")
 SERVER_NAME = 'Sanic/%s' % sanic.__version__
@@ -21,7 +21,7 @@ async def test(request):
 
 @app.route("/payload/<size:int>")
 async def payload(request, size):
-    response = json({'size': size, 'data': 'd' * size})
+    response = text('d' * size)
     response.headers['Server'] = SERVER_NAME
     response.headers['Date'] = http_date(int(time.time()))
     return response

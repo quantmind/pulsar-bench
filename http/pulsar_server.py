@@ -9,15 +9,14 @@ class SimpleRoute(Router):
     def get(self, request):
         response = request.response
         response.headers['content-type'] = 'application/json'
-        response.content = json.dumps({"test": True})
+        response.set_content(json.dumps({"test": True}))
         return response
 
     @route('payload/<int(min=1,max=8388608):size>')
     def payload(self, request):
         response = request.response
         size = request.urlargs['size']
-        response.headers['content-type'] = 'application/json'
-        response.content = json.dumps({'size': size, 'data': 'd' * size})
+        response.set_content('d' * size)
         return response
 
     @route('ping-redis')
@@ -25,7 +24,7 @@ class SimpleRoute(Router):
         result = await self.root.redis.ping()
         response = request.response
         response.headers['content-type'] = 'application/json'
-        response.content = json.dumps({"redis-ping": result})
+        response.set_content(json.dumps({"redis-ping": result}))
         return response
 
     @property

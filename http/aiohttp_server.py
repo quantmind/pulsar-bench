@@ -22,8 +22,8 @@ async def handle(request):
 async def payload(request):
     size = int(request.match_info.get('size', 1000))
     return web.Response(
-        body=json.dumps({"size": size, "data": 'd'*size}).encode('utf-8'),
-        content_type='application/json'
+        body=('d'*size).encode('utf-8'),
+        content_type='text/plain'
     )
 
 
