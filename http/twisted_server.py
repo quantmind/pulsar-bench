@@ -14,9 +14,9 @@ else:
     from twisted.internet import default as defaultreactor
     defaultreactor.install()
 
-from twisted.web.server import Site
-from twisted.web.resource import Resource
-from twisted.internet import reactor
+from twisted.web.server import Site         # noqa
+from twisted.web.resource import Resource   # noqa
+from twisted.internet import reactor        # noqa
 
 
 class TestResource(Resource):

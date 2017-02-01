@@ -1,0 +1,8 @@
+-e git://github.com/quantmind/pulsar.git@dev#egg=pulsar
+sanic
+aiohttp
+twisted
+tornado
+ujson
+httptools
+docker-py

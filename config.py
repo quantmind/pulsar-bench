@@ -1,24 +1,24 @@
 
 servers = [
     {
-        "name": "pulsar",
+        "name": "pulsar-uv",
         "title": 'Pulsar + uvloop + httptools',
-        "command": "python pulsar_server -w 0 --io uv"
+        "command": "python3 http/pulsar_server.py -w 0 --io uv"
     },
     {
-        "name": "pulsar",
+        "name": "pulsar-vanilla",
         "title": 'Pulsar vanilla',
-        "command": "python pulsar_server -w 0 --http-py-parser"
+        "command": "python3 pulsar_server -w 0"
     },
     {
         "name": "aiohttp",
         "title": 'aiohttp + uvloop',
-        "command": "python aiohttp_server"
+        "command": "python3 aiohttp_server"
     },
     {
         "name": "twisted",
         "title": "Twisted HTTP web server",
-        "command": "python twisted_server"
+        "command": "python3 twisted_server"
     },
     {
         "name": "gunicorn+meinheld+flask",
