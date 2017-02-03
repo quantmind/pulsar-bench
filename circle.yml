@@ -1,0 +1,24 @@
+machine:
+
+  services:
+    - docker
+
+  python:
+    version: 3.5.2
+
+
+checkout:
+  post:
+    - docker info
+    - chmod +x build.sh
+
+
+dependencies:
+  override:
+    - pip install docker flake8
+
+
+test:
+  override:
+    - flake8
+    - ./build.sh

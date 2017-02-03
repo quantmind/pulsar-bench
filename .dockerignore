@@ -1,2 +1,3 @@
-bench.py
+*.sh
 *.log
+env
