@@ -11,18 +11,19 @@ checkout:
   post:
     - docker info
     - chmod +x build.sh
+    - chmod +x benchmark.sh
 
 
 dependencies:
   override:
-    - pip install docker flake8
+    - pip install flake8
     - flake8
     - ./build.sh
 
 
 test:
   override:
-    - python bench.py pulsar-uv
+    - ./benchmark.sh pulsar-uv
 
 
 deployment:

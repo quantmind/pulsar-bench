@@ -1,4 +1,8 @@
-# pulsar-bench
+# Pulsar benchmarking
+
+[![CircleCI](https://circleci.com/gh/quantmind/pulsar-bench.svg?style=svg)](https://circleci.com/gh/quantmind/pulsar-bench)
+[![devDependency Status](https://david-dm.org/quantmind/pulsar-bench/dev-status.svg)](https://david-dm.org/quantmind/pulsar-bench#info=devDependencies)
+
 
 Benchmarking HTTP servers. **Under development**.
 

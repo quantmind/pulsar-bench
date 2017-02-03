@@ -19,7 +19,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && git clone https://github.com/wg/wrk.git \
     && cd wrk \
     && make \
+    && mv wrk /usr/local/bin \
     && cd .. \
+    && rm -rf wrk \
     && pip3 install -U pip \
     && pip3 install -r requirements.txt \
     && npm install -g express
