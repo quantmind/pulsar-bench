@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker run --rm --name bench-runner pulsar/benchmark python3 bench.py $0
+docker run --rm --name bench-runner quantmind/pulsar-bench python3 bench.py $0

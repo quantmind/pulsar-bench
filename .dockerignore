@@ -1,3 +1,4 @@
 *.sh
 *.log
 env
+circle.yml
