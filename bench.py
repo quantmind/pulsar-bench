@@ -11,7 +11,7 @@ from pbench import (
 )
 
 
-DOCKER_IMAGE = 'pulsar/benchmark'
+DOCKER_IMAGE = 'quantmind/pulsar-bench'
 LOGGER = logging.getLogger('pulsar.bench')
 WARMUP_DURATION = 10
 
@@ -106,7 +106,7 @@ def main(args=None):
             continue
 
         LOGGER.info('Warming up server...')
-        LOGGER.info('wrk %s', ' '.join(args))
+        LOGGER.info('wrk %s', ' '.join(warmup))
         LOGGER.info(format_wrk_result(wrk(warmup), WARMUP_DURATION))
 
         duration = args.duration
@@ -123,10 +123,10 @@ def main(args=None):
                 title = 'BENCHMARK: {}'.format(variation['title'])
                 LOGGER.info(title)
                 LOGGER.info('-' * len(title))
-                args = variation['args'][:]
-                args.append('--duration={}'.format(duration))
-                LOGGER.info('wrk %s', ' '.join(args))
-                result = wrk(args)
+                vargs = variation['args'][:]
+                vargs.append('--duration={}'.format(duration))
+                LOGGER.info('wrk %s', ' '.join(vargs))
+                result = wrk(vargs)
                 LOGGER.info(format_wrk_result(result, duration))
                 benchmark_data['variations'].append(result)
         finally:

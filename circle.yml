@@ -16,9 +16,18 @@ checkout:
 dependencies:
   override:
     - pip install docker flake8
+    - flake8
+    - ./build.sh
 
 
 test:
   override:
-    - flake8
-    - ./build.sh
+    - python bench.py pulsar-uv
+
+
+deployment:
+  registry:
+    branch: master
+    commands:
+      - docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
+      - docker push quantmind/pulsar-bench

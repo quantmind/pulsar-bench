@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t pulsar/benchmark $(dirname $0)
+docker build -t quantmind/pulsar-bench $(dirname $0)
