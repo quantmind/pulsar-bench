@@ -134,7 +134,7 @@ def main(args=None):
         LOGGER.info('Save benchmark data into %s', args.save_json)
         info = cli.containers.run(
             DOCKER_IMAGE,
-            name=container_name,
+            name='pulsar-bench-info',
             command='python3 bench.py --info',
             remove=True
         ).decode('utf-8')
