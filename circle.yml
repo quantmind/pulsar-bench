@@ -19,6 +19,7 @@ dependencies:
     - pip install flake8
     - flake8
     - ./build.sh
+    - ./benchmark.sh --info
 
 
 test:

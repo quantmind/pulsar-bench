@@ -5,10 +5,8 @@ import logging
 from datetime import datetime
 
 from config import servers
-from pbench import (
-    wait_for_server, docker_client, docker_remove, wrk, format_wrk_result,
-    platform_info
-)
+from pbench import wait_for_server, wrk, format_wrk_result, platform_info
+from pbench.containers import docker_client, docker_remove
 
 
 DOCKER_IMAGE = 'quantmind/pulsar-bench'

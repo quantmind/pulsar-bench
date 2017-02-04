@@ -6,18 +6,18 @@ Benchmarking HTTP servers. **Under development**.
 
 # Installation
 
-Install the following:
+To run benchmarks you can use Docker or python and virtualenv.
+The easiest way is to download the latest image
+```
+docker pull quantmind/pulsar-bench
+```
+and run benchmarks with
+```
+./benchmark.sh
+```
+Use ``./benchmark.sh -h`` for various options, including selective benchmark running.
 
-* Docker
-* Python 3
-
-Build the docker image containing the servers being tested by running:
+To build the image locally:
 ```
 ./build.sh.
 ```
-On a Mac make sure you execute:
-```
-eval "$(docker-machine env default)"
-```
-on your shell (note to self).
-The benchmarks can then be ran with ./run_benchmarks. Use ./run_benchmarks --help for various options, including selective benchmark running.

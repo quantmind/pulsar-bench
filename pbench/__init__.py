@@ -1,12 +1,13 @@
-from .server import wait_for_server
+"""Benchmarking Http servers"""
+from .server import wait_for_server, platform_info
 from .wrk import wrk, format_wrk_result
-from .utils import docker_client, docker_remove, platform_info
+
+
+__version__ = '0.1.0'
 
 
 __all__ = [
     'wait_for_server',
-    'docker_client',
-    'docker_remove',
     'platform_info',
     'format_wrk_result',
     'wrk'
