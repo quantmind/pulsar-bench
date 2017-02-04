@@ -136,7 +136,6 @@ def main(args=None):
             DOCKER_IMAGE,
             name='pulsar-bench-info',
             command='python3 bench.py --info',
-            remove=True
         ).decode('utf-8')
         benchmarks_data = {
             'date': datetime.now().isoformat(),
@@ -149,6 +148,8 @@ def main(args=None):
 
         with open(args.save_json, 'w') as f:
             json.dump(benchmarks_data, f, indent=4)
+
+        docker_remove('pulsar-bench-info', cli)
 
 
 if __name__ == '__main__':
