@@ -11,7 +11,7 @@ checkout:
   post:
     - docker info
     - chmod +x build.sh
-    - chmod +x benchmark.sh
+    - chmod +x circle.sh
 
 
 dependencies:
@@ -19,12 +19,12 @@ dependencies:
     - pip install flake8
     - flake8
     - ./build.sh
-    - ./benchmark.sh --info
+    - ./circle.sh --info
 
 
 test:
   override:
-    - ./benchmark.sh pulsar-uv
+    - ./circle.sh pulsar-uv
 
 
 deployment:
