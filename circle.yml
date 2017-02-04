@@ -24,7 +24,7 @@ dependencies:
 
 test:
   override:
-    - ./benchmark.sh pulsar-uv
+    - ./benchmark.sh pulsar-uv -J benchmarks.json
 
 
 deployment:

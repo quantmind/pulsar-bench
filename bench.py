@@ -131,6 +131,7 @@ def main(args=None):
             docker_remove(container)
 
     if args.save_json:
+        LOGGER.info('Save benchmark data into %s', args.save_json)
         info = cli.containers.run(
             DOCKER_IMAGE,
             name=container_name,

@@ -24,7 +24,7 @@ def wait_for_server(address, timeout=60):
             sock.connect(addr)
             sock.sendall(b'GET / HTTP/1.0\r\n\r\n')
             if sock.recv(4):
-                print('Server is up and running.')
+                LOGGER.info('Server is up and running.')
             else:
                 raise IOError('socket read')
         except IOError:

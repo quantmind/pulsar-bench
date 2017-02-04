@@ -1,5 +1,10 @@
+import logging
+
 import docker
 from docker.errors import DockerException, APIError, NotFound
+
+
+LOGGER = logging.getLogger('pulsar.bench')
 
 
 def docker_client():
@@ -12,6 +17,10 @@ def docker_client():
 
 
 def docker_remove(container, cli=None):
+    """Safely remove a container if possible.
+
+    Never throws
+    """
     try:
         if isinstance(container, str):
             assert cli, "docker client required"
@@ -23,6 +32,9 @@ def docker_remove(container, cli=None):
                 container.kill()
             except APIError:
                 pass
-        container.remove()
+        try:
+            container.remove()
+        except APIError as e:
+            LOGGER.error('Cannot remove container %s: %s', container.name, e)
     except NotFound:
         pass
