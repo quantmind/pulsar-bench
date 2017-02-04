@@ -136,7 +136,8 @@ def main(args=None):
             DOCKER_IMAGE,
             name=container_name,
             command='python3 bench.py --info',
-        )
+            remove=True
+        ).decode('utf-8')
         benchmarks_data = {
             'date': datetime.now().isoformat(),
             'duration': args.duration,
@@ -147,7 +148,7 @@ def main(args=None):
         }
 
         with open(args.save_json, 'w') as f:
-            json.dump(benchmarks_data, f)
+            json.dump(benchmarks_data, f, indent=4)
 
 
 if __name__ == '__main__':
