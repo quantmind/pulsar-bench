@@ -27,7 +27,7 @@ def upload():
     filename = args.filename[0]
     with open(filename, 'r') as fp:
         datestr = json.load(fp)['date']
-    datestr = datestr.replace(':', '-').replace('T', '-')
+    datestr = datestr.split('.')[0].replace(':', '-').replace('T', '-')
 
     exit_code = 0
     for target in ('benchmark-latest.json', 'benchmark-%s.json' % datestr):
