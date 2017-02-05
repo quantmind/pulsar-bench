@@ -33,3 +33,4 @@ deployment:
     commands:
       - docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
       - docker push quantmind/pulsar-bench
+      - python upload.py benchmarks.json --path $BENCHMARK_PATH

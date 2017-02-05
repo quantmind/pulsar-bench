@@ -137,8 +137,9 @@ def main(args=None):
             name='pulsar-bench-info',
             command='python3 bench.py --info',
         ).decode('utf-8')
+        datestr = datetime.utcnow().isoformat().split('.')[0]
         benchmarks_data = {
-            'date': datetime.now().isoformat(),
+            'date': datestr,
             'duration': args.duration,
             'platform': json.loads(info),
             'concurrency_levels': args.concurrency_levels,
