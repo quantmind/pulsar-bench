@@ -27,9 +27,10 @@ def upload():
     filename = args.filename[0]
     with open(filename, 'r') as fp:
         datestr = json.load(fp)['date']
+    datestr = datestr.replace(':', '-').replace('T', '-')
 
     exit_code = 0
-    for target in ('benchmark_latest.json', 'benchmark_%s.json' % datestr):
+    for target in ('benchmark-latest.json', 'benchmark-%s.json' % datestr):
         key = '%s/%s' % (path, target) if path else target
         cmd = ['aws', 's3api', 'put-object', '--body', filename,
                '--bucket', bucket, '--key', key]
