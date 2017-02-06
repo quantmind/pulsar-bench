@@ -37,9 +37,12 @@ def upload():
         LOGGER.info('Upload to bucket: %s key: %s', bucket, key)
         result = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE)
+        out, err = result.communicate()
         if result.returncode:
             exit_code = 1
-            LOGGER.error(result.communicate()[1].decode('utf-8'))
+            LOGGER.error(err.decode('utf-8') or out.decode('utf-8'))
+        else:
+            LOGGER.info(err.decode('utf-8') or out.decode('utf-8'))
 
     return exit_code
 
