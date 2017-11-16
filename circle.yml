@@ -4,7 +4,7 @@ machine:
     - docker
 
   python:
-    version: 3.6
+    version: 3.6.3
 
 
 dependencies:

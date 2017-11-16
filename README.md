@@ -1,6 +1,6 @@
 # Pulsar benchmarking
 
-Benchmark [pulsar][] and other HTTP servers.
+Benchmark [pulsar][] and other HTTP asynchronous servers.
 
 [![CircleCI](https://circleci.com/gh/quantmind/pulsar-bench.svg?style=svg)](https://circleci.com/gh/quantmind/pulsar-bench)
 
@@ -28,3 +28,6 @@ and benchmark
 ```
 wrk http://127.0.0.1:7000/payload/1024 --concurrency=10 --duration=30
 ```
+
+
+[pulsar]: https://github.com/quantmind/pulsar
