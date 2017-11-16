@@ -1,6 +1,7 @@
 *.sh
 *.log
 venv
+node_modules
 circle.yml
 .eggs
 .idea

@@ -4,20 +4,11 @@ machine:
     - docker
 
   python:
-    version: 3.5.2
-
-
-checkout:
-  post:
-    - docker info
-    - chmod +x build.sh
-    - chmod +x benchmark.sh
+    version: 3.6
 
 
 dependencies:
   override:
-    - pip install flake8
-    - flake8
     - make build
     - ./benchmark.sh --info
 

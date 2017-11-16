@@ -18,7 +18,7 @@ servers = [
     {
         "name": "node",
         "title": "Node/express HTTP web server",
-        "command": "node http/node_server.py"
+        "command": "node http/node_server.js"
     },
     {
         "name": "sanic",

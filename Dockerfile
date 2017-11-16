@@ -27,7 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     #  required because we build pulsar from the repo for now
     && pip install cython \
     && pip install -r requirements.txt \
-    && npm install -g express \
+    && npm install \
     && chmod +x entrypoint
 
 

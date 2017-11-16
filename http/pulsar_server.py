@@ -49,7 +49,7 @@ if __name__ == '__main__':
     import sys
     argv = sys.argv[1:]
     params = dict(
-        bind='127.0.0.1:7000',
+        bind=':7000',
         log_handler='console_simple',
         log_level=['warning'],
         argv=argv
