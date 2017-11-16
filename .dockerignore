@@ -1,5 +1,8 @@
 *.sh
 *.log
-env
+venv
 circle.yml
 .eggs
+.idea
+.git
+.DS_Store

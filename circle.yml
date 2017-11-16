@@ -18,13 +18,13 @@ dependencies:
   override:
     - pip install flake8
     - flake8
-    - ./build.sh
+    - make build
     - ./benchmark.sh --info
 
 
 test:
   override:
-    - ./benchmark.sh pulsar-uv -J results/benchmarks.json
+    - ./benchmark.sh -J results/benchmarks.json
 
 
 deployment:
@@ -32,5 +32,5 @@ deployment:
     branch: master
     commands:
       - docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
-      - docker push quantmind/pulsar-bench
+      - make push
       - python upload.py benchmarks.json --path $BENCHMARK_PATH

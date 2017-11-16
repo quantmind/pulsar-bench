@@ -1,15 +1,16 @@
 import re
+import os
 import json
 import argparse
 import logging
 from datetime import datetime
 
-from config import servers
+from pbench.config import servers
 from pbench import wait_for_server, wrk, format_wrk_result, platform_info
 from pbench.containers import docker_client, docker_remove
 
 
-DOCKER_IMAGE = 'quantmind/pulsar-bench'
+DOCKER_IMAGE = os.environ.get('DOCKER_IMAGE', 'quantmind/pulsar-bench')
 LOGGER = logging.getLogger('pulsar.bench')
 WARMUP_DURATION = 10
 
@@ -43,7 +44,9 @@ def parser():
 def main(args=None):
     args = parser().parse_args(args)
     if args.info:
-        print(json.dumps(platform_info(), indent=4))
+        info = platform_info()
+        info['docker image'] = DOCKER_IMAGE
+        print(json.dumps(info, indent=4))
         return
 
     if args.benchmarks:
@@ -85,7 +88,7 @@ def main(args=None):
             continue
 
         LOGGER.info(benchmark['title'])
-        LOGGER.info('=' * len(benchmark['title']))
+        LOGGER.info('=' * (2 + len(benchmark['title'])))
         LOGGER.info('')
 
         LOGGER.info('Starting server...')

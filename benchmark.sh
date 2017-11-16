@@ -7,4 +7,4 @@ docker run --rm \
     --net host \
     --name bench-runner \
     quantmind/pulsar-bench \
-    python3 bench.py "$@"
+    python bench.py "$@"

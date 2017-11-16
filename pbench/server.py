@@ -4,8 +4,20 @@ import logging
 import os.path
 import platform
 import warnings
+import sys
 from multiprocessing import cpu_count
 
+try:
+    import httptools
+except:
+    httptools = False
+
+try:
+    import uvloop
+except:
+    uvloop = False
+
+from pulsar.api import HAS_C_EXTENSIONS
 
 LOGGER = logging.getLogger('pulsar.bench')
 
@@ -75,5 +87,9 @@ def platform_info():
         'cpus': cpu_count(),
         'arch': machine,
         'system': '{} {}'.format(system, platform.release()),
-        'distribution': distribution
+        'distribution': distribution,
+        'python': '.'.join((str(v) for v in sys.version_info[:3])),
+        'pulsar c extensions': HAS_C_EXTENSIONS,
+        'httptools': bool(httptools),
+        'uvloop': bool(uvloop)
     }

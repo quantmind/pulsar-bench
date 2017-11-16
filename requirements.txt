@@ -3,7 +3,6 @@ sanic
 aiohttp
 twisted
 tornado
--e git://github.com/squeaky-pl/japronto.git@master#egg=japronto
 ujson
 httptools
 uvloop

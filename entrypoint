@@ -1,7 +1,5 @@
 #!/bin/bash
+set -e
 
-
-UID=${UID:-0}
-GID=${GID:-0}
-
-gosu ${UID}:${GID} "$@"
+echo "Launching command: $@"
+exec "$@"

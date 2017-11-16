@@ -4,7 +4,7 @@ import sanic
 from sanic.response import json, text
 
 from pulsar.apps.data import create_store
-from pulsar.api import http_date
+from pulsar.utils.lib import http_date
 
 app = sanic.Sanic("test")
 SERVER_NAME = 'Sanic/%s' % sanic.__version__

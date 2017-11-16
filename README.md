@@ -11,17 +11,30 @@ Bench pulsar and other HTTP servers.
 # Installation
 
 To run benchmarks you can use Docker or python and virtualenv.
-The easiest way is to download the latest image
+The easiest way is to execute
 ```
-docker pull quantmind/pulsar-bench
+make bench
 ```
+This will download the latest image from dockerhub and run the benchmarks.
 and run benchmarks with
 ```
-./benchmark.sh
+make bench -h
 ```
-Use ``./benchmark.sh -h`` for various options, including selective benchmark running.
+Will give several options for the benchmark suite
 
 To build the image locally:
 ```
 ./build.sh.
+```
+
+# Benchmark without docker image
+
+During development it can be useful to benchmark live code, without the docker image.
+In this case, create a python virtualenvironment and install requirements. Run a server
+```bash
+python http/pulsar_server.py -w 0 -io uv
+```
+and benchmark
+```
+wrk http://127.0.0.1:7000/payload/1024 --concurrency=10 --duration=30
 ```

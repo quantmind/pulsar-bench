@@ -1,32 +1,36 @@
-FROM ubuntu:16.04
-MAINTAINER luca@quantmind.com
+FROM python:3.6.3
 
-RUN DEBIAN_FRONTEND=noninteractive \
-        apt-get update && apt-get install -y \
-            language-pack-en
-
-ENV LANG en_US.UTF-8
-
-ADD . /home/benchmarking
 WORKDIR /home/benchmarking
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && apt-get install -y \
+        locales
+
+ENV DOCKER true
+
+ENV LANG en_US.UTF-8
+
+ADD . /home/benchmarking
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
+    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt-get install -y \
             autoconf automake libtool build-essential libssl-dev \
-            python3 python3-pip git gosu curl npm \
-    && curl -sL https://deb.nodesource.com/setup_7.x | bash - \
-    && apt-get install -y nodejs \
+            nodejs git curl \
     && git clone https://github.com/wg/wrk.git \
     && cd wrk \
     && make \
     && mv wrk /usr/local/bin \
     && cd .. \
     && rm -rf wrk \
-    && pip3 install -U pip \
-    && pip3 install -r requirements.txt \
-    && npm install -g express
+    && pip install -U pip wheel setuptools \
+    #  required because we build pulsar from the repo for now
+    && pip install cython \
+    && pip install -r requirements.txt \
+    && npm install -g express \
+    && chmod +x entrypoint
 
 
 EXPOSE 7000
 
-# ENTRYPOINT ["./entrypoint"]
+ENTRYPOINT ["./entrypoint"]
