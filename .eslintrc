@@ -1,0 +1,20 @@
+parser: babel-eslint
+
+parserOptions:
+  sourceType: module
+
+env:
+  es6: true
+  browser: true
+  node: true
+
+extends:
+  "eslint:recommended"
+
+rules:
+  no-cond-assign: 0
+  no-floating-decimal: 2
+  semi: 2
+
+globals:
+    faker: true

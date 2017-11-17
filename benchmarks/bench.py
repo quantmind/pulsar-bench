@@ -5,7 +5,6 @@ import argparse
 import logging
 from datetime import datetime
 
-from benchmarks.config import servers
 from benchmarks.pbench import (
     wait_for_server, wrk, format_wrk_result, platform_info
 )
@@ -16,6 +15,7 @@ DOCKER_IMAGE = os.environ.get('DOCKER_IMAGE', 'quantmind/pulsar-bench')
 BENCHMARK_PATH = os.environ.get('BENCHMARK_PATH', '')
 BENCHMARK_PATH_DOCKER = os.environ.get('BENCHMARK_PATH_DOCKER', '')
 LOGGER = logging.getLogger('pulsar.bench')
+SERVER_CONFIG = os.path.join(os.path.dirname(__file__), 'config.json')
 WARMUP_DURATION = 10
 
 
@@ -55,6 +55,9 @@ def parser():
 
 
 def main(args=None):
+    with open(SERVER_CONFIG) as fp:
+        servers = json.load(fp)
+
     args = parser().parse_args(args)
     info = platform_info()
     if args.info:

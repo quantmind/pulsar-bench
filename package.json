@@ -1,13 +1,52 @@
 {
+    "version": "0.1.0",
+    "title": "Pulsar Benchmarks",
+    "name": "pulsar-benchmarks",
+    "description": "Pulsar and other HTTP servers benchmarks",
+    "author": {
+        "name": "quantmind.com",
+        "email": "message@quantmind.com"
+    },
+    "keywords": [
+        "pulsar",
+        "asyncio",
+        "concurrency"
+    ],
+    "license": "BSD-3-Clause",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/quantmind/pulsar-bench.git"
+    },
     "dependencies": {
-        "d3-visualize": "0.3",
+        "d3-array": "1.2",
+        "d3-collection": "1.0",
+        "d3-dispatch": "1.0",
+        "d3-dsv": "1.0",
+        "d3-format": "1.2",
+        "d3-let": "0.3",
+        "d3-selection": "1.1",
+        "d3-time": "1.0",
+        "d3-time-format": "2.1",
+        "d3-timer": "1.0",
+        "d3-transition": "1.1",
         "express": "4.16"
     },
     "devDependencies": {
+        "babel-core": "6.26",
+        "babel-eslint": "8.0",
+        "babel-plugin-external-helpers": "6.22",
+        "babel-polyfill": "6.26",
+        "babel-preset-env": "1.6",
+        "babel-preset-es2015-rollup": "3.0",
+        "babelify": "8.0",
         "bootstrap": "4.0.0-beta",
-        "eslint": "4.10",
+        "d3-visualize": "0.3",
+        "es6-promise": "4.1",
+        "eslint": "4.11",
         "eslint-plugin-disable": "0.3",
+        "handlebars": "4",
         "node-sass": "4.6",
+        "package-preamble": "0.1",
         "rollup": "0.51",
         "rollup-plugin-babel": "3.0",
         "rollup-plugin-commonjs": "8.2",
@@ -17,5 +56,14 @@
         "rollup-watch": "4.3",
         "uglify-js": "3.1",
         "whatwg-fetch": "2.0"
+    },
+    "scripts": {
+        "rollup": "rollup -c visual/rollup.config.js --banner \"$(preamble)\"",
+        "dev": "rollup -c visual/rollup.config.js --banner \"$(preamble)\" -w",
+        "lint": "eslint visual",
+        "minify": "uglifyjs --preamble \"$(preamble)\" site/assets/visual.js -c -m -o site/assets/visual.min.js",
+        "css": "node-sass visual/site.scss site/assets/site.css --include-path node_modules --output-style compressed",
+        "site": "./visual/build.sh",
+        "build": "yarn lint && yarn site && yarn rollup && yarn minify && yarn css"
     }
 }

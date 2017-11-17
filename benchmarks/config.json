@@ -1,18 +1,17 @@
-
-servers = [
+[
     {
         "name": "pulsar-uv",
-        "title": 'Pulsar + uvloop + httptools',
+        "title": "Pulsar + uvloop + httptools",
         "command": "python benchmarks/servers/pulsar_server.py -w 0 --io uv"
     },
     {
         "name": "pulsar-vanilla",
-        "title": 'Pulsar vanilla',
+        "title": "Pulsar vanilla",
         "command": "python benchmarks/servers/pulsar_server.py -w 0"
     },
     {
         "name": "aiohttp",
-        "title": 'aiohttp + uvloop',
+        "title": "aiohttp + uvloop",
         "command": "python benchmarks/servers/aiohttp_server.py"
     },
     {
@@ -22,7 +21,7 @@ servers = [
     },
     {
         "name": "sanic",
-        "title": 'sanic + uvloop',
+        "title": "sanic + uvloop",
         "command": "python benchmarks/servers/sanic_server.py"
     },
     {
