@@ -1,20 +1,76 @@
 version: 2
 jobs:
     website:
-        working_directory: ~/website
-        docker:
-          - image: python:3.6.3
-        steps:
-          - checkout
-          - run:
-              name: install node packages
-              command: yarn install
+      working_directory: ~/website
+      docker:
+        - image: circleci/node
+      steps:
+        - checkout
+        - run:
+            name: install node packages
+            command: yarn install
+        - run:
+            name: install node packages
+            command: yarn install
+        - run:
+            name: authenticate bot
+            command: ./dev/gitbot.sh
+        - run:
+            name: publish site
+            command: ./dev/publish.sh
+    flake8:
+      working_directory: ~/bench
+      docker:
+        - image: python:3.6.3
+      steps:
+        - checkout
+        - run:
+            command: pip install -r benchmarks/requirements/ci.txt
+        - run:
+            command: flake8
+    docker:
+      working_directory: ~/bench
+      steps:
+        - checkout
+        - run:
+            command: make build
+        - run:
+            name: information about benchmarks
+            command: ./benchmark.sh --info
+        - run:
+            name: dockerhub login
+            command: docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
+        - run:
+            command: make push
+    benchmarks:
+      working_directory: ~/bench
+      steps:
+        - checkout
+        - run:
+            name: information about benchmarks
+            command: ./benchmark.sh --info
+        - run:
+            name: run benchmarks and upload
+            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
 
 workflow:
   version: 2
-  website:
+  standard:
     filters:
       branches:
-        only: web
+        only: master
     jobs:
+      - flake8
       - website
+  docker:
+    filters:
+      branches:
+        only: docker
+    jobs:
+      - docker
+  benchmark:
+    filters:
+      branches:
+        only: benchmark
+    jobs:
+      - benchmark

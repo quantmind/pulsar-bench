@@ -4,7 +4,7 @@
 cp node_modules/es6-promise/dist/es6-promise.auto.min.js site/assets/
 cp node_modules/whatwg-fetch/fetch.js site/assets/
 #
-node visual/site.js
+node dev/site.js
 cp -r visual/config.json site/.
 # copy circle.yml
-cp circle.yml site/.
+cp -r .circleci site/.
