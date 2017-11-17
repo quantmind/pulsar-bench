@@ -30,6 +30,7 @@ jobs:
             command: flake8
     docker:
       working_directory: ~/bench
+      machine: true
       steps:
         - checkout
         - run:
@@ -44,6 +45,7 @@ jobs:
             command: make push
     benchmarks:
       working_directory: ~/bench
+      machine: true
       steps:
         - checkout
         - run:
