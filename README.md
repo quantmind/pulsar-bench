@@ -10,12 +10,21 @@ Benchmark [pulsar][] and other HTTP asynchronous servers.
 
 # Installation
 
-To run benchmarks you can use Docker or python/virtualenv.
-The easiest way is to execute
+To run benchmarks you can use the Docker image.
 ```
-make bench
+./benchmark.sh -h
 ```
-This will download the latest image from dockerhub and run the benchmarks.
+This will download the latest image from dockerhub and display information
+about the possible benchmarks to execute.
+To build a new image
+```
+make build
+```
+
+To run a benchmark for a given server
+```
+./benchmark.sh pulsar
+```
 
 # Benchmark without docker image
 

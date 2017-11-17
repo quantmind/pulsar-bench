@@ -1,6 +1,9 @@
 -e git://github.com/quantmind/pulsar.git@dev#egg=pulsar
 sanic
 aiohttp
+flask
+gunicorn
+meinheld
 twisted
 tornado
 ujson

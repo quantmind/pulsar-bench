@@ -26,11 +26,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && pip install -U pip wheel setuptools \
     #  required because we build pulsar from the repo for now
     && pip install cython \
-    && pip install -r requirements.txt \
+    && pip install -r benchmarks/requirements/servers.txt \
     && npm install \
     && chmod +x entrypoint
 
 
 EXPOSE 7000
 
-ENTRYPOINT ["./entrypoint"]
+//ENTRYPOINT ["./entrypoint"]

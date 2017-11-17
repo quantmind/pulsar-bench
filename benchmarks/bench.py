@@ -5,14 +5,25 @@ import argparse
 import logging
 from datetime import datetime
 
-from pbench.config import servers
-from pbench import wait_for_server, wrk, format_wrk_result, platform_info
-from pbench.containers import docker_client, docker_remove
+from benchmarks.config import servers
+from benchmarks.pbench import (
+    wait_for_server, wrk, format_wrk_result, platform_info
+)
+from benchmarks.pbench.containers import docker_client, docker_remove
 
 
 DOCKER_IMAGE = os.environ.get('DOCKER_IMAGE', 'quantmind/pulsar-bench')
+BENCHMARK_PATH = os.environ.get('BENCHMARK_PATH', '')
+BENCHMARK_PATH_DOCKER = os.environ.get('BENCHMARK_PATH_DOCKER', '')
 LOGGER = logging.getLogger('pulsar.bench')
 WARMUP_DURATION = 10
+
+
+if not BENCHMARK_PATH or not BENCHMARK_PATH_DOCKER:
+    LOGGER.warning(
+        'BENCHMARK_PATH or BENCHMARK_PATH_DOCKER environment paths not set.'
+        'Are you using the benchmark.sh script to launch benchmarks?'
+    )
 
 
 def parser():
@@ -46,6 +57,7 @@ def main(args=None):
     if args.info:
         info = platform_info()
         info['docker image'] = DOCKER_IMAGE
+        info['benchmarks'] = servers
         print(json.dumps(info, indent=4))
         return
 
@@ -98,6 +110,7 @@ def main(args=None):
             name=container_name,
             command=benchmark['command'],
             ports={'7000/tcp': 7000},
+            volumes={BENCHMARK_PATH: BENCHMARK_PATH_DOCKER},
             detach=True
         )
 
