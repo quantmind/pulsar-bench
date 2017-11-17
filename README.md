@@ -26,17 +26,16 @@ To run a benchmark for a given server
 ./benchmark.sh pulsar
 ```
 
-# Benchmark without docker image
-
-During development it can be useful to benchmark live code, without the docker image.
-In this case, create a python virtual environment and install requirements. Run a server
-```bash
-python http/pulsar_server.py -w 0 -io uv
+System and benchmarks information
 ```
-and benchmark
+./benchmark.sh --info
 ```
-wrk http://127.0.0.1:7000/payload/1024 --concurrency=10 --duration=30
+Run and save to results folder (important)
 ```
+./benchmark.sh -J results/benchmarks.json
+```
+It is important to save to the ``results`` folder because it is mapped
+to the local drive so you can retrieve the results.
 
 
 [pulsar]: https://github.com/quantmind/pulsar

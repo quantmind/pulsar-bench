@@ -49,13 +49,15 @@ def parser():
                         help='path to save benchmark results in JSON format')
     parser.add_argument('--info', action='store_true', default=False,
                         help='show platform info')
+    parser.add_argument('--serve', action='store_true', default=False,
+                        help='run a web server rather than benchmark')
     return parser
 
 
 def main(args=None):
     args = parser().parse_args(args)
+    info = platform_info()
     if args.info:
-        info = platform_info()
         info['docker image'] = DOCKER_IMAGE
         info['benchmarks'] = servers
         print(json.dumps(info, indent=4))
@@ -119,18 +121,15 @@ def main(args=None):
             LOGGER.error('Could not start server')
             continue
 
+        if args.serve:
+            break
+
         LOGGER.info('Warming up server...')
         LOGGER.info('wrk %s', ' '.join(warmup))
         LOGGER.info(format_wrk_result(wrk(warmup), WARMUP_DURATION))
 
         duration = args.duration
-
-        benchmark_data = {
-            'name': benchmark['name'],
-            'variations': []
-        }
-
-        benchmarks_data.append(benchmark_data)
+        name = benchmark['name']
 
         try:
             for variation in variations:
@@ -142,29 +141,29 @@ def main(args=None):
                 LOGGER.info('wrk %s', ' '.join(vargs))
                 result = wrk(vargs)
                 LOGGER.info(format_wrk_result(result, duration))
-                benchmark_data['variations'].append(result)
+                data = dict(
+                    server=name,
+                    concurrency=variation['concurrency'],
+                    payload_size=variation['payload_size']
+                )
+                data.update(result)
+                benchmarks_data.append(data)
         finally:
             docker_remove(container)
 
-    if args.save_json:
+    if args.save_json and not args.serve:
         LOGGER.info('Save benchmark data into %s', args.save_json)
-        info = cli.containers.run(
-            DOCKER_IMAGE,
-            name='pulsar-bench-info',
-            command='python3 bench.py --info',
-        ).decode('utf-8')
         datestr = datetime.utcnow().isoformat().split('.')[0]
-        benchmarks_data = {
-            'date': datestr,
-            'duration': args.duration,
-            'platform': json.loads(info),
-            'concurrency_levels': args.concurrency_levels,
-            'payload_size_levels': args.payload_size_levels,
-            'benchmarks': benchmarks_data,
-        }
+        info.update(
+            date=datestr,
+            duration=args.duration,
+            concurrency_levels=args.concurrency_levels,
+            payload_size_levels=args.payload_size_levels
+        )
+        info['benchmarks'] = benchmarks_data
 
         with open(args.save_json, 'w') as f:
-            json.dump(benchmarks_data, f, indent=4)
+            f.write(json.dumps(info, indent=4))
 
         docker_remove('pulsar-bench-info', cli)
 

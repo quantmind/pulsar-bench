@@ -33,4 +33,4 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
 
 EXPOSE 7000
 
-//ENTRYPOINT ["./entrypoint"]
+ENTRYPOINT ["./entrypoint"]

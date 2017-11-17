@@ -1,20 +1,22 @@
 import time
 import socket
 import logging
-import os.path
 import platform
 import warnings
 import sys
+from collections import OrderedDict
 from multiprocessing import cpu_count
+
+from .cpuinfo import get_processor_name
 
 try:
     import httptools
-except:
+except ImportError:
     httptools = False
 
 try:
     import uvloop
-except:
+except ImportError:
     uvloop = False
 
 from pulsar.api import HAS_C_EXTENSIONS
@@ -54,16 +56,7 @@ def platform_info():
     machine = platform.machine()
     processor = platform.processor()
     system = platform.system()
-
-    cpuinfo_f = '/proc/cpuinfo'
-
-    if processor in {machine, 'unknown'} and os.path.exists(cpuinfo_f):
-        with open(cpuinfo_f, 'rt') as f:
-            for line in f:
-                if line.startswith('model name'):
-                    _, _, p = line.partition(':')
-                    processor = p.strip()
-                    break
+    processor = get_processor_name()
 
     if 'Linux' in system:
 
@@ -82,8 +75,10 @@ def platform_info():
     else:
         distribution = None
 
-    return {
-        'cpu': processor,
+    info = OrderedDict()
+    if processor:
+        info['processor'] = processor
+    info.update({
         'cpus': cpu_count(),
         'arch': machine,
         'system': '{} {}'.format(system, platform.release()),
@@ -92,4 +87,5 @@ def platform_info():
         'pulsar c extensions': HAS_C_EXTENSIONS,
         'httptools': bool(httptools),
         'uvloop': bool(uvloop)
-    }
+    })
+    return info

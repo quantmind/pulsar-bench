@@ -33,7 +33,8 @@ def upload():
     for target in ('benchmark-latest.json', 'benchmark-%s.json' % datestr):
         key = '%s/%s' % (path, target) if path else target
         cmd = ['aws', 's3api', 'put-object', '--body', filename,
-               '--bucket', bucket, '--key', key]
+               '--bucket', bucket, '--key', key,
+               '--content-type', 'application/json']
         LOGGER.info('Upload to bucket: %s key: %s', bucket, key)
         result = subprocess.Popen(cmd, stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE)
