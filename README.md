@@ -8,18 +8,14 @@ Benchmark [pulsar][] and other HTTP asynchronous servers.
 
 **Github source**: [quantmind/pulsar-bench](https://github.com/quantmind/pulsar-bench)
 
-# Installation
+# Getting Started
 
-To run benchmarks you can use the Docker image.
+To run benchmarks you need docker installed. Subsequently execute:
 ```
 ./benchmark.sh -h
 ```
-This will download the latest image from dockerhub and display information
+This will download the latest image from docker-hub and display information
 about the possible benchmarks to execute.
-To build a new image
-```
-make build
-```
 
 To run a benchmark for a given server
 ```
@@ -30,6 +26,7 @@ System and benchmarks information
 ```
 ./benchmark.sh --info
 ```
+
 Run and save to results folder (important)
 ```
 ./benchmark.sh -J results/benchmarks.json
@@ -37,5 +34,9 @@ Run and save to results folder (important)
 It is important to save to the ``results`` folder because it is mapped
 to the local drive so you can retrieve the results.
 
+To build a new image
+```
+make build
+```
 
 [pulsar]: https://github.com/quantmind/pulsar
