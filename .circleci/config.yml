@@ -10,9 +10,6 @@ jobs:
             name: install node packages
             command: yarn install
         - run:
-            name: install node packages
-            command: yarn install
-        - run:
             name: authenticate bot
             command: ./dev/gitbot.sh
         - run:
@@ -55,7 +52,7 @@ jobs:
             name: run benchmarks and upload
             command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
 
-workflow:
+workflows:
   version: 2
   standard:
     filters:
