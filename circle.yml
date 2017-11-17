@@ -31,4 +31,4 @@ deployment:
     commands:
       - docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
       - make push
-      - python -m benchmarks.upload results/benchmarks.json --path $BENCHMARK_PATH
+      - python -m benchmarks.upload benchmarks.json --path $BENCHMARK_PATH

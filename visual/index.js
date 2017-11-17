@@ -1,26 +1,21 @@
-export {version as mapsVersion} from '../package.json';
-
 import {assign, inBrowser} from 'd3-let';
 import {view, viewForms, viewBootstrapForms, viewReady, viewEvents, viewProviders} from 'd3-view';
-import {visualComponents, visuals} from 'd3-visualize';
+import {visualComponents, visuals, colorScales} from 'd3-visualize';
+import {interpolateRdBu} from 'd3-scale-chromatic';
+
+import binaryFormat from './bytes';
+
 
 if (inBrowser) {
     if (window.development) viewProviders.setDebug(true);
 }
 
 
-assign(visuals.options.dataContext, {
-    $geoDataCode (d) {
-        if (!this.filters) return;
-        var country = getCountry(this.filters.country),
-            v = `${country.code}-regions`;
-        return d ? `${v}-${d}` : v;
-    },
+colorScales.set('redyellowblue', (d3) => d3.scaleSequential(interpolateRdBu));
 
-    $region() {
-        //    source = this.$geoDataCode(),
-        //    store = this.dataStore;
-    }
+
+assign(visuals.options.dataContext, {
+    $binaryFormat: binaryFormat
 });
 
 
@@ -47,9 +42,5 @@ export function appView () {
 }
 
 function formListener () {
-
-}
-
-function getCountry () {
 
 }

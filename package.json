@@ -25,6 +25,8 @@
         "d3-format": "1.2",
         "d3-let": "0.3",
         "d3-selection": "1.1",
+        "d3-scale": "1.0",
+        "d3-scale-chromatic": "1.1",
         "d3-time": "1.0",
         "d3-time-format": "2.1",
         "d3-timer": "1.0",
@@ -58,12 +60,16 @@
         "whatwg-fetch": "2.0"
     },
     "scripts": {
-        "rollup": "rollup -c visual/rollup.config.js --banner \"$(preamble)\"",
-        "dev": "rollup -c visual/rollup.config.js --banner \"$(preamble)\" -w",
-        "lint": "eslint visual",
+        "rollup": "rollup -c dev/rollup.config.js --banner \"$(preamble)\"",
+        "require": "rollup -c dev/rollup.require.js --banner \"$(preamble)\"",
+        "dev": "rollup -c dev/rollup.config.js --banner \"$(preamble)\" -w",
+        "lint": "eslint visual dev",
+        "cleanup": "rm -rf site/* && mkdir -p site/assets",
         "minify": "uglifyjs --preamble \"$(preamble)\" site/assets/visual.js -c -m -o site/assets/visual.min.js",
-        "css": "node-sass visual/site.scss site/assets/site.css --include-path node_modules --output-style compressed",
-        "site": "./visual/build.sh",
-        "build": "yarn lint && yarn site && yarn rollup && yarn minify && yarn css"
+        "minify-require": "uglifyjs --preamble \"$(preamble)\" site/assets/d3-require.js -c -m -o site/assets/d3-require.min.js",
+        "css": "node-sass visual/site.scss site/assets/visual.css --include-path node_modules --output-style compressed",
+        "site": "./dev/build.sh",
+        "build": "yarn lint && yarn cleanup && yarn site && yarn rollup && yarn minify && yarn require && yarn minify-require && yarn css",
+        "prepare": "npm run-script build"
     }
 }

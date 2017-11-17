@@ -1,0 +1,20 @@
+version: 2
+jobs:
+    website:
+        working_directory: ~/website
+        docker:
+          - image: python:3.6.3
+        steps:
+          - checkout
+          - run:
+              name: install node packages
+              command: yarn install
+
+workflow:
+  version: 2
+  website:
+    filters:
+      branches:
+        only: web
+    jobs:
+      - website

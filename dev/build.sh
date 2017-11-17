@@ -1,9 +1,4 @@
 #!/bin/bash
-
-# assets directory
-rm -rf site/assets
-mkdir -p site/assets
-
 #
 # install es6-promise & fetch for IE
 cp node_modules/es6-promise/dist/es6-promise.auto.min.js site/assets/

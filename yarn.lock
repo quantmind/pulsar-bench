@@ -1167,6 +1167,12 @@ d3-require@0.4.5:
   version "0.4.5"
   resolved "https://registry.yarnpkg.com/d3-require/-/d3-require-0.4.5.tgz#60b89ce06696f8146f1c6dcb51ef540229f7389e"
 
+d3-scale-chromatic@1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/d3-scale-chromatic/-/d3-scale-chromatic-1.1.1.tgz#811406e8e09dab78a49dac4a32047d5d3edd0c44"
+  dependencies:
+    d3-interpolate "1"
+
 d3-scale@1.0:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/d3-scale/-/d3-scale-1.0.6.tgz#bce19da80d3a0cf422c9543ae3322086220b34ed"

@@ -1,1 +1,65 @@
-{}
+{
+    "data": [
+        {
+            "name": "benchmarks",
+            "url": "https://fluidily-public.s3.amazonaws.com/pulsar/benchmarks/benchmark-latest.json",
+            "cache": true
+        },
+        {
+            "name": "benchdata",
+            "source": "benchmarks",
+            "expression": "frame.data[0].benchmarks"
+        }
+    ],
+    "height": "60%",
+    "margin": "20%",
+    "mouse": {
+        "over": ["fill", "tooltip"]
+    },
+    "color": {
+        "scale": "viridis"
+    },
+    "visuals": {
+        "comparison": {
+            "title": "Requests per second vs body size",
+            "type": "barchart",
+            "data": "benchdata",
+            "barchart": {
+                "lineWidth": 0,
+                "groupby": "server",
+                "x": "payload_size",
+                "y": "rps",
+                "axisX": true,
+                "axisY": true
+            },
+            "xAxis": {
+                "format": "$binaryFormat('.1s')"
+            },
+            "legend": {
+
+            },
+            "tooltip": {
+                "html": "d.key + ' rps: ' + $format('.2s', d.value)"
+            }
+        },
+        "comparison2": {
+            "title": "Requests per second vs body size",
+            "type": "linechart",
+            "data": "benchdata",
+            "linechart": {
+                "lineWidth": 3,
+                "groupby": "server",
+                "x": "payload_size",
+                "y": "rps",
+                "gradient": true,
+                "axisX": true,
+                "axisY": true,
+                "scaleX": "log"
+            },
+            "xAxis": {
+                "format": "$binaryFormat('.1s')",
+                "ticks": 4
+            }
+        }
+    }
+}
