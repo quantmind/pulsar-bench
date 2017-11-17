@@ -1,9 +1,0 @@
-*.sh
-*.log
-venv
-node_modules
-circle.yml
-.eggs
-.idea
-.git
-.DS_Store
