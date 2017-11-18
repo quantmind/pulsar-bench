@@ -36,10 +36,10 @@ jobs:
             name: information about benchmarks
             command: ./benchmark.sh --info
         - run:
-            name: run benchmarks and upload
+            name: run benchmarks
             command: ./benchmark.sh -J results/benchmarks.json
         - run:
-            name: upload
+            name: upload to S3
             command: python -m benchmarks.upload results/benchmarks.json --path $BENCHMARK_PATH
         - run:
             name: dockerhub login
