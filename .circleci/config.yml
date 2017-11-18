@@ -25,7 +25,7 @@ jobs:
             command: pip install -r benchmarks/requirements/ci.txt
         - run:
             command: flake8
-    docker:
+    benchmark:
       working_directory: ~/bench
       machine: true
       steps:
@@ -47,17 +47,14 @@ jobs:
 
 workflows:
   version: 2
-  standard:
-    filters:
-      branches:
-        only:
-          - master
+  build-n-deploy:
     jobs:
       - flake8
-      - website
-  benchmark:
-    filters:
-      branches:
-        only: benchmark
-    jobs:
-      - benchmark
+      - website:
+          filters:
+            branches:
+              only: master
+      - benchmark:
+          filters:
+            branches:
+              only: benchmark
