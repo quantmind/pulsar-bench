@@ -36,21 +36,13 @@ jobs:
             name: information about benchmarks
             command: ./benchmark.sh --info
         - run:
+            name: run benchmarks and upload
+            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
+        - run:
             name: dockerhub login
             command: docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
         - run:
             command: make push
-    benchmarks:
-      working_directory: ~/bench
-      machine: true
-      steps:
-        - checkout
-        - run:
-            name: information about benchmarks
-            command: ./benchmark.sh --info
-        - run:
-            name: run benchmarks and upload
-            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
 
 workflows:
   version: 2
@@ -61,12 +53,6 @@ workflows:
     jobs:
       - flake8
       - website
-  docker:
-    filters:
-      branches:
-        only: docker
-    jobs:
-      - docker
   benchmark:
     filters:
       branches:

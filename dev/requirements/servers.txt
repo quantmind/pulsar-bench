@@ -1,4 +1,4 @@
--e git://github.com/quantmind/pulsar.git@dev#egg=pulsar
+-e git://github.com/quantmind/pulsar.git#egg=pulsar
 sanic
 aiohttp
 flask
