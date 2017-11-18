@@ -37,7 +37,10 @@ jobs:
             command: ./benchmark.sh --info
         - run:
             name: run benchmarks and upload
-            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
+            command: ./benchmark.sh -J results/benchmarks.json
+        - run:
+            name: upload
+            command: python -m benchmarks.upload results/benchmarks.json --path $BENCHMARK_PATH
         - run:
             name: dockerhub login
             command: docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
@@ -50,6 +53,9 @@ workflows:
   build-n-deploy:
     jobs:
       - flake8
+          filters:
+            branches:
+              only: master
       - website:
           filters:
             branches:

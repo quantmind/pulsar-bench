@@ -6,5 +6,3 @@ cp node_modules/whatwg-fetch/fetch.js site/assets/
 #
 node dev/site.js
 cp -r visual/config.json site/.
-# copy circle.yml
-cp -r .circleci site/.

@@ -16,15 +16,12 @@ def parser():
     return parser
 
 
-def upload():
-    args = parser().parse_args()
-    path = args.path[0]
+def upload(filename, path):
     bits = [p for p in path.split('/') if p]
     assert bits
     bucket = bits[0]
     path = '/'.join(bits[1:])
 
-    filename = args.filename[0]
     with open(filename, 'r') as fp:
         datestr = json.load(fp)['date']
     datestr = datestr.split('.')[0].replace(':', '-').replace('T', '-')
@@ -50,4 +47,5 @@ def upload():
 
 if __name__ == '__main__':
     logging.basicConfig(level='INFO', format='%(message)s')
-    exit(upload())
+    args = parser().parse_args()
+    exit(upload(args.filename[0], args.path[0]))
