@@ -44,12 +44,14 @@ jobs:
         - run:
             command: make push
 
-workflow:
+
+workflows:
   version: 2
   standard:
     filters:
       branches:
-        only: master
+        only:
+          - master
     jobs:
       - flake8
       - website
