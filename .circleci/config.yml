@@ -44,7 +44,7 @@ jobs:
         - run:
             command: make push
 
-workflows:
+workflow:
   version: 2
   standard:
     filters:
