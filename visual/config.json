@@ -26,6 +26,7 @@
             "data": "benchdata",
             "barchart": {
                 "lineWidth": 0,
+                "cornerRadius": 4,
                 "groupby": "server",
                 "x": "payload_size",
                 "y": "rps",
@@ -36,7 +37,7 @@
                 "format": "$binaryFormat('.1s')"
             },
             "legend": {
-
+                "offset": ["5%", "5%"]
             },
             "tooltip": {
                 "html": "d.key + ' rps: ' + $format('.2s', d.value)"

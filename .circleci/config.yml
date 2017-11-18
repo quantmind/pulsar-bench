@@ -22,7 +22,7 @@ jobs:
       steps:
         - checkout
         - run:
-            command: pip install -r benchmarks/requirements/ci.txt
+            command: pip install -r dev/requirements/ci.txt
         - run:
             command: flake8
     benchmark:
