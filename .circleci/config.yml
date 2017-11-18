@@ -10,9 +10,6 @@ jobs:
             name: install node packages
             command: yarn install
         - run:
-            name: install node packages
-            command: yarn install
-        - run:
             name: authenticate bot
             command: ./dev/gitbot.sh
         - run:
@@ -25,11 +22,12 @@ jobs:
       steps:
         - checkout
         - run:
-            command: pip install -r benchmarks/requirements/ci.txt
+            command: pip install -r dev/requirements/ci.txt
         - run:
             command: flake8
-    docker:
+    benchmark:
       working_directory: ~/bench
+      machine: true
       steps:
         - checkout
         - run:
@@ -38,39 +36,25 @@ jobs:
             name: information about benchmarks
             command: ./benchmark.sh --info
         - run:
+            name: run benchmarks and upload
+            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
+        - run:
             name: dockerhub login
             command: docker login -p $DOCKER_PASS -e $DOCKER_EMAIL -u $DOCKER_USER
         - run:
             command: make push
-    benchmarks:
-      working_directory: ~/bench
-      steps:
-        - checkout
-        - run:
-            name: information about benchmarks
-            command: ./benchmark.sh --info
-        - run:
-            name: run benchmarks and upload
-            command: ./benchmark.sh -J results/benchmarks.json --upload $BENCHMARK_PATH
 
-workflow:
+
+workflows:
   version: 2
-  standard:
-    filters:
-      branches:
-        only: master
+  build-n-deploy:
     jobs:
       - flake8
-      - website
-  docker:
-    filters:
-      branches:
-        only: docker
-    jobs:
-      - docker
-  benchmark:
-    filters:
-      branches:
-        only: benchmark
-    jobs:
-      - benchmark
+      - website:
+          filters:
+            branches:
+              only: master
+      - benchmark:
+          filters:
+            branches:
+              only: benchmark
