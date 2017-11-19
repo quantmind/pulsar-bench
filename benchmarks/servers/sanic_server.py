@@ -6,7 +6,7 @@ from sanic.response import json, text
 from pulsar.apps.data import create_store
 from pulsar.utils.lib import http_date
 
-app = sanic.Sanic("test")
+app = sanic.Sanic("test", log_config=None)
 SERVER_NAME = 'Sanic/%s' % sanic.__version__
 redis = create_store('redis://127.0.0.1:6379/15').client()
 

@@ -7,7 +7,7 @@ app.get('/', function (req, res) {
 
 app.get('/payload/:size', function (req, res) {
     var size = +req.params.size;
-    res.json({ size: size, data: new Array(size+1).join('d')});
+    res.send(new Array(size).join('d'));
 });
 
 app.listen(7000, function () {

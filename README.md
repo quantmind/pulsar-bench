@@ -39,5 +39,20 @@ To build a new image
 make build
 ```
 
+# Benchmark outside Docker
 
+To run benchmarks outside docker, follow these instructions:
+```
+virtualenv venv
+source venb/bin/activate
+pip install -r dev/requirements/servers.txt
+```
+Then start one of the servers, for example
+```
+python benchmarks/servers/aiohttp_server.py
+```
+and execute ``wrk`` benchmarks
+```
+wrk http://127.0.0.1:7000/payload/1024 -c 10 -d 30
+```
 [pulsar]: https://github.com/quantmind/pulsar
