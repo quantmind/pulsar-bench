@@ -45,6 +45,7 @@ To run benchmarks outside docker, follow these instructions:
 ```
 virtualenv venv
 source venb/bin/activate
+pip install -r dev/requirements/ci.txt
 pip install -r dev/requirements/servers.txt
 ```
 Then start one of the servers, for example
