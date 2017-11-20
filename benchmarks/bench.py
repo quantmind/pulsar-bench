@@ -37,7 +37,7 @@ def parser():
                         help='docker container name (pulsarbench)')
     parser.add_argument('--host', type=str, default='127.0.0.1',
                         help='docker host (127.0.0.1)')
-    parser.add_argument('--concurrency-levels', type=int, default=[10],
+    parser.add_argument('--concurrency-levels', type=int, default=[50],
                         nargs='+',
                         help='a list of concurrency levels to use [10]')
     parser.add_argument('--payload-size-levels', type=int, nargs='+',

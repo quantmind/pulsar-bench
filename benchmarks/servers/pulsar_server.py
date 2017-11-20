@@ -1,5 +1,5 @@
 # Run with python3 simple_server.py -w 0 --io uv
-from pulsar.apps.wsgi import WSGIServer, WsgiHandler, LazyWsgi, Router, route
+from pulsar.apps.wsgi import WSGIServer, Router, route
 from pulsar.utils.system import json
 from pulsar.apps.data import create_store
 
@@ -34,15 +34,15 @@ class SimpleRoute(Router):
         return self._redis
 
 
-class Site(LazyWsgi):
+class WsgiSite:
+    _router = None
 
-    def setup(self, environ):
-        return WsgiHandler(middleware=[SimpleRoute('/')])
-
-
-def server(**params):
-    params['callable'] = Site()
-    return WSGIServer(**params)
+    def __call__(self, environ, start_response):
+        if self._router is None:
+            self._router = SimpleRoute('/')
+        response = self._router(environ, start_response)
+        response.start(environ, start_response)
+        return response
 
 
 if __name__ == '__main__':
@@ -52,19 +52,20 @@ if __name__ == '__main__':
         bind=':7000',
         log_handler='console_simple',
         log_level=['warning'],
+        callable=WsgiSite(),
         argv=argv
     )
     if 'profile' in argv:
         from pulsar.utils import profiler
         argv.remove('profile')
         with profiler.Profiler():
-            server(**params).start()
+            WSGIServer(**params).start()
     elif 'trace' in argv:
         import tracemalloc
         argv.remove('trace')
         tracemalloc.start()
         try:
-            server(**params).start()
+            WSGIServer(**params).start()
         except SystemExit:
             snapshot = tracemalloc.take_snapshot()
             top_stats = snapshot.statistics('lineno')
@@ -72,4 +73,4 @@ if __name__ == '__main__':
             for stat in top_stats[:100]:
                 print(stat)
     else:
-        server(**params).start()
+        WSGIServer(**params).start()
