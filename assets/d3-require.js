@@ -1046,7 +1046,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 })));
 //# sourceMappingURL=d3-require.js.map
 (function (require) {
-var dependencies = '{"d3-array":"1.2","d3-collection":"1.0","d3-dispatch":"1.0","d3-dsv":"1.0","d3-format":"1.2","d3-let":"0.3","d3-scale":"1.0","d3-scale-chromatic":"1.1","d3-selection":"1.1","d3-time":"1.0","d3-time-format":"2.1","d3-timer":"1.0","d3-transition":"1.1","d3-color":"1","d3-interpolate":"1","d3-ease":"1","d3-view":"1.0.1"}';
+var dependencies = '{"d3-array":"1.2","d3-collection":"1.0","d3-dispatch":"1.0","d3-dsv":"1.0","d3-format":"1.2","d3-let":"0.3","d3-scale":"1.0","d3-scale-chromatic":"1.1","d3-selection":"1.1","d3-time":"1.0","d3-time-format":"2.1","d3-timer":"1.0","d3-transition":"1.1","d3-view":"1.0.1","d3-color":"1","d3-interpolate":"1","d3-ease":"1"}';
 Object.keys(dependencies).forEach(function (name) {
     require.libs.set(name, name + '@' + dependencies[name]);
 })
