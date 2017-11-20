@@ -31,6 +31,7 @@
         "d3-time-format": "2.1",
         "d3-timer": "1.0",
         "d3-transition": "1.1",
+        "d3-view": "1.0.1",
         "express": "4.16"
     },
     "devDependencies": {
@@ -42,8 +43,7 @@
         "babel-preset-es2015-rollup": "3.0",
         "babelify": "8.0",
         "bootstrap": "4.0.0-beta",
-        "d3-view": "1.0.1",
-        "d3-visualize": "0.4",
+        "d3-visualize": "0.4.1",
         "es6-promise": "4.1",
         "eslint": "4.11",
         "eslint-plugin-disable": "0.3",

@@ -1161,7 +1161,7 @@ d3-view@1.0.1:
     d3-selection "1.1"
     d3-timer "1.0"
 
-d3-visualize@0.4:
+d3-visualize@0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/d3-visualize/-/d3-visualize-0.4.1.tgz#8464139e322ec22b74f00822b7ec6af64f7e22d6"
   dependencies:
@@ -2237,17 +2237,13 @@ mimic-fn@^1.0.0:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimist@0.0.8:
+minimist@0.0.8, minimist@~0.0.1:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.8.tgz#857fcabfc3397d2625b8228262e86aa7a011b05d"
 
 minimist@^1.1.3, minimist@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
-
-minimist@~0.0.1:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
 "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1:
   version "0.5.1"
@@ -2884,8 +2880,8 @@ rollup-watch@4.3:
     rollup-pluginutils "^2.0.1"
 
 rollup@0.51:
-  version "0.51.7"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.51.7.tgz#3c387316ceca3655727cbef716f2733aa15c46df"
+  version "0.51.8"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.51.8.tgz#58bd0b642885f4770b5f93cc64f14e4233c2236d"
 
 run-async@^2.2.0:
   version "2.3.0"
@@ -3257,8 +3253,8 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
 uglify-js@3.1:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.9.tgz#dffca799308cf327ec3ac77eeacb8e196ce3b452"
+  version "3.1.10"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.10.tgz#c4a5f9b5c6276b40cb971c1d97c9eeb26af9509c"
   dependencies:
     commander "~2.11.0"
     source-map "~0.6.1"

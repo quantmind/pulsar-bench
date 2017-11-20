@@ -22,6 +22,14 @@
                 <visual schema="comparison"></visual>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <info></info>
+            </div>
+            <div class="col-md-8">
+                <marked url="overview.md"></marked>
+            </div>
+        </div>
     </dashboard>
     <script type="application/javascript">
         {{#unless min}}

@@ -1,7 +1,17 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'd3-visualize/scss/d3-visualize';
 
+@import 'pace/themes/blue/pace-theme-center-simple';
+
 .nav-link {
     padding: .0rem 1rem;
     font-size: 20px;
+}
+
+dl.row {
+    margin-bottom: 0;
+}
+
+.doc {
+    padding: 1.25rem;
 }

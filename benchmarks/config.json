@@ -1,6 +1,6 @@
 [
     {
-        "name": "pulsar-uv",
+        "name": "pulsar+uvloop",
         "title": "Pulsar + uvloop + httptools",
         "command": "python benchmarks/servers/pulsar_server.py -w 0 --io uv"
     },
@@ -10,17 +10,17 @@
         "command": "python benchmarks/servers/pulsar_server.py -w 0"
     },
     {
-        "name": "aiohttp",
+        "name": "aiohttp+uvloop",
         "title": "aiohttp + uvloop",
         "command": "python benchmarks/servers/aiohttp_server.py"
     },
     {
-        "name": "node",
+        "name": "node+express",
         "title": "Node/express HTTP web server",
         "command": "node benchmarks/servers/node_server.js"
     },
     {
-        "name": "sanic",
+        "name": "sanic+uvloop",
         "title": "sanic + uvloop",
         "command": "python benchmarks/servers/sanic_server.py"
     },

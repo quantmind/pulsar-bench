@@ -4,6 +4,8 @@ import {visualComponents, visuals, colorScales} from 'd3-visualize';
 import {interpolateRdBu} from 'd3-scale-chromatic';
 
 import binaryFormat from './bytes';
+import marked from './marked';
+import info from './info';
 
 
 if (inBrowser) {
@@ -27,7 +29,12 @@ export function start () {
 
 
 export function appView () {
-    var vm = view()
+    var vm = view({
+            components: {
+                marked,
+                info
+            }
+        })
         .use(viewForms)
         .use(viewBootstrapForms)
         .use(visualComponents);
