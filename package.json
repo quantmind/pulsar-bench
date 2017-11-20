@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "title": "Pulsar Benchmarks",
     "name": "pulsar-benchmarks",
     "description": "Pulsar and other HTTP servers benchmarks",
