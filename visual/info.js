@@ -1,6 +1,4 @@
 import {timeFormat} from 'd3-time-format';
-import {dataEvents} from 'd3-visualize';
-
 
 const format = timeFormat('%d %b %Y, %H:%M');
 const labels = ['system', 'arch', 'processor', 'cpus', 'python'];
@@ -19,7 +17,7 @@ export default {
             info: []
         };
     },
-    render (data, props, el) {
+    render () {
         const model = this.model;
         model.dataStore.onData('benchmarks.info', frame => {
             model.info = info(frame.data[0]);
