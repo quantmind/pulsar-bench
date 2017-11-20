@@ -59,5 +59,17 @@ if __name__ == '__main__':
         argv.remove('profile')
         with profiler.Profiler():
             server(**params).start()
+    elif 'trace' in argv:
+        import tracemalloc
+        argv.remove('trace')
+        tracemalloc.start()
+        try:
+            server(**params).start()
+        except SystemExit:
+            snapshot = tracemalloc.take_snapshot()
+            top_stats = snapshot.statistics('lineno')
+            print("[ Top 100 ]")
+            for stat in top_stats[:100]:
+                print(stat)
     else:
         server(**params).start()
