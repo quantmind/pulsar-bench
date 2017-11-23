@@ -1,4 +1,4 @@
-// pulsar-benchmarks Version 0.1.2. Copyright 2017 quantmind.com.
+// pulsar-benchmarks Version 0.1.3. Copyright 2017 quantmind.com.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-let'), require('d3-collection'), require('d3-timer'), require('d3-selection'), require('d3-dispatch'), require('d3-dsv'), require('d3-array'), require('d3-time-format'), require('d3-transition'), require('d3-format'), require('d3-scale-chromatic')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'd3-let', 'd3-collection', 'd3-timer', 'd3-selection', 'd3-dispatch', 'd3-dsv', 'd3-array', 'd3-time-format', 'd3-transition', 'd3-format', 'd3-scale-chromatic'], factory) :
